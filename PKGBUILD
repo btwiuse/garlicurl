@@ -13,7 +13,7 @@ options=('!libtool')
 source=("https://curl.se/download/${_pkgname}-${pkgver}.tar.bz2"
 	'garlicurl.diff')
 md5sums=('5ba1f5d144166ea9a5a828c57f7728b0'
-         '6bfa0bab37e0ae75beecab466e14879b')
+         '831e9caa92b5563585190b5936dab095')
 
 build() {
     cd ${_pkgname}-${pkgver}

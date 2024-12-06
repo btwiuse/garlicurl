@@ -1,8 +1,6 @@
-diff --git a/lib/hostip.c b/lib/hostip.c
-index d721403b7237c2..8ab183af1b39e8 100644
 --- a/lib/hostip.c
 +++ b/lib/hostip.c
-@@ -682,13 +682,7 @@ enum resolve_t Curl_resolv(struct Curl_easy *data,
+@@ -692,14 +692,6 @@
    CURLcode result;
    enum resolve_t rc = CURLRESOLV_ERROR; /* default to failure */
    struct connectdata *conn = data->conn;
@@ -14,6 +12,6 @@ index d721403b7237c2..8ab183af1b39e8 100644
 -    failf(data, "Not resolving .onion address (RFC 7686)");
 -    return CURLRESOLV_ERROR;
 -  }
-+
    *entry = NULL;
  #ifndef CURL_DISABLE_DOH
+   conn->bits.doh = FALSE; /* default is not */
