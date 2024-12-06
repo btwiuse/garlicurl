@@ -11,11 +11,9 @@ license=('MIT')
 depends=('zlib' 'openssl' 'bash' 'ca-certificates' 'libssh2' 'libpsl' 'libidn2' 'libnghttp2')
 options=('!libtool')
 source=("https://curl.se/download/${_pkgname}-${pkgver}.tar.bz2"
-        'garlicurl.diff'
-        "https://github.com/curl/curl/commit/49ced6160bec578259f0d4f72a93bdfa4f4c0a83.diff")
+	'garlicurl.diff')
 md5sums=('5ba1f5d144166ea9a5a828c57f7728b0'
-         'f70fbd9907996c1555aa5ad4a8f2a8eb'
-         'fbd6e3ceb5f92b83e86433c254f70e4c')
+         '6bfa0bab37e0ae75beecab466e14879b')
 
 build() {
     cd ${_pkgname}-${pkgver}
