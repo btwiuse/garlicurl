@@ -1,6 +1,6 @@
 pkgname=garlicurl
 _pkgname=curl
-provides=('curl')
+provides=('curl' 'libcurl.so=4-64')
 conflicts=('curl')
 pkgver=8.11.0
 pkgrel=4
