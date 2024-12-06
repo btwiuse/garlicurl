@@ -1,0 +1,47 @@
+pkgname=curl
+pkgver=8.11.0
+pkgrel=1
+pkgdesc="An URL retrival utility and library"
+arch=('x86_64')
+url="https://curl.se/"
+license=('MIT')
+depends=('zlib' 'openssl' 'bash' 'ca-certificates' 'libssh2' 'libpsl' 'libidn2' 'nghttp2')
+options=('!libtool')
+source=("https://curl.se/download/${pkgname}-${pkgver}.tar.bz2"
+        'curlbuild.h'
+        "https://github.com/curl/curl/commit/52e822173aa3cd4f610531d32fbf943f026cdca6.diff")
+md5sums=('5ba1f5d144166ea9a5a828c57f7728b0'
+         '751bd433ede935c8fae727377625a8ae'
+         'eb90f3c5853eff653a4000983285d796')
+
+build() {
+    cd ${pkgname}-${pkgver}
+    #patch -p1 -i ${srcdir}/52e822173aa3cd4f610531d32fbf943f026cdca6.diff
+
+    ./configure \
+        --with-random=/dev/urandom \
+        --prefix=/usr \
+        --mandir=/usr/share/man \
+        --enable-ipv6 \
+        --disable-ldaps \
+        --disable-ldap \
+        --enable-manual \
+        --enable-versioned-symbols \
+        --enable-threaded-resolver \
+        --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt \
+        --with-libssh2 \
+        --with-openssl \
+        --with-fish-functions-dir=/usr/share/fish/vendor_completions.d/completions
+    make
+}
+
+package() {
+    cd ${pkgname}-${pkgver}
+    make DESTDIR=${pkgdir} install
+
+    install -Dm644 COPYING ${pkgdir}/usr/share/licenses/${pkgname}/COPYING
+    install -Dm644 docs/libcurl/libcurl.m4 ${pkgdir}/usr/share/aclocal/libcurl.m4
+
+    #mv ${pkgdir}/usr/include/curl/curlbuild.h ${pkgdir}/usr/include/curl/curlbuild-64.h
+    #install -m 644 ${srcdir}/curlbuild.h ${pkgdir}/usr/include/curl/curlbuild.h
+}
